@@ -25,7 +25,7 @@ sudo apt -y install libcairo2-dev libjpeg62-turbo-dev libpng-dev libtool-bin xrd
 
 echo "Tomcat9"
 
-sudo apt install -y openjdk-17-jdk
+sudo apt install -y openjdk-21-jre-headless
 
 sudo wget https://maven.xwiki.org/xwiki-keyring.gpg -O /usr/share/keyrings/xwiki-keyring.gpg
 sudo wget "https://maven.xwiki.org/stable/xwiki-stable.list" -O /etc/apt/sources.list.d/xwiki-stable.list
