@@ -9,7 +9,7 @@ sudo apt update
 echo "Basics..."
 
 sudo apt -y install xfce4 xfce4-goodies xorg pulseaudio
-sudo apt -y install firefox-esr network-manager wget git
+sudo apt -y install firefox-esr network-manager wget git ssh
 
 echo "Networking..."
 
@@ -21,11 +21,28 @@ sudo systemctl start NetworkManager
 
 echo "Libs..."
 
-sudo apt -y install libcairo2-dev libjpeg62-turbo-dev libpng-dev libtool-bin xrdp xrdp-xorg libavcodec-dev libavformat-dev libavutil-dev libswscale-dev uuid-dev freerdp2-dev lib pango1.0-dev libssh2-1-dev libtelnet-dev libwebsockets-dev libssl-dev libvorbis-dev libwebp-dev
+sudo apt -y install libcairo2-dev libjpeg62-turbo-dev libpng-dev libtool-bin xrdp xrdp-xorg libavcodec-dev libavformat-dev libavutil-dev libswscale-dev uuid-dev freerdp2-dev lib pango1.0-dev libssh2-1-dev libtelnet-dev libwebsockets-dev libssl-dev libvorbis-dev libwebp-dev build-essential gcc
+
+echo "Tomcat9"
+
+sudo apt install -y openjdk-11-jre-headless 
+
+sudo wget https://maven.xwiki.org/xwiki-keyring.gpg -O /usr/share/keyrings/xwiki-keyring.gpg
+sudo wget "https://maven.xwiki.org/stable/xwiki-stable.list" -O /etc/apt/sources.list.d/xwiki-stable.list
+
+sudo apt-get update
+
+sudo apt install xwiki-tomcat9-mariadb
+
+echo "You can remove this repo later if you want."
+
+sleep 2
 
 echo "Getting guacamole!"
 
 wget https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-1.6.0.war?action=download
+
+sudo systemctl enable tomcat9
 
 tar -xzf guacamole-server-1.6.0.tar.gz
 cd guacamole-server-1.6.0/
