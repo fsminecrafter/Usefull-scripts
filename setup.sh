@@ -32,7 +32,9 @@ sudo wget "https://maven.xwiki.org/stable/xwiki-stable.list" -O /etc/apt/sources
 
 sudo apt-get update
 
-sudo apt install xwiki-tomcat9-mariadb
+sudo apt install -y mariadb-server mariadb-client
+
+sudo apt install xwiki-tomcat9-mariadb xwiki-mariadb-common xwiki-tomcat9-common
 
 echo "You can remove this repo later if you want."
 
@@ -40,7 +42,7 @@ sleep 2
 
 echo "Getting guacamole!"
 
-wget https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-1.6.0.war?action=download
+wget https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-1.6.0.war
 
 sudo systemctl enable tomcat9
 
@@ -56,8 +58,6 @@ make
 sudo make install
 
 echo "MariaDB"
-
-sudo apt install -y mariadb-server mariadb-client
 
 sudo mariadb-secure-installation
 
