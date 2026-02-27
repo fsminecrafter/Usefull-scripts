@@ -42,7 +42,46 @@ echo "MariaDB"
 
 sudo apt install -y mariadb-server mariadb-client
 
+sudo mariadb-secure-installation
+
+cat schema/*.sql | mysql -u root -p guacamole_db
+
+wget https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-auth-jdbc-1.6.0.tar.gz
+
+wget https://mariadb.com/downloads/connectors/connectors-data-access/java8-connector
+
 echo "Manually execute these in MariaDB client"
 
 echo "CREATE DATABASE guacamole_db;"
-echo "Then run the part 2 of this script"
+echo "
+CREATE USER 'guacamole_user' IDENTIFIED BY 'some_password';
+GRANT SELECT,INSERT,UPDATE,DELETE ON guacamole_db.* TO 'guacamole_user';
+FLUSH PRIVILEGES;
+
+Native installations of Guacamole under Apache Tomcat or similar are configured by modifying the contents of GUACAMOLE_HOME (Guacamole’s configuration directory), which is located at /etc/guacamole by default and may need to be created first:
+
+    You should have a copy of guacamole-auth-jdbc-1.6.0.tar.gz from earlier when you created and initialized the database.
+
+    Create the GUACAMOLE_HOME/extensions and GUACAMOLE_HOME/lib directories, if they do not already exist.
+
+    Copy mysql/guacamole-auth-jdbc-mysql-1.6.0.jar within GUACAMOLE_HOME/extensions.
+
+    Copy the JDBC driver for your database to GUACAMOLE_HOME/lib. Either of the following MySQL-compatible JDBC drivers are supported for connecting Guacamole with MariaDB or MySQL:
+
+        MariaDB Connector/J
+
+        MySQL Connector/J (the required .jar will be within a .tar.gz archive)
+
+    If you do not have a specific reason to use one driver over the other, it’s recommended that you use the JDBC driver provided by your database vendor.
+
+    Configure Guacamole to use database authentication, as described below.
+
+Add this to guacamole.properties
+
+mysql-database: guacamole_db
+mysql-username: guacamole_user
+mysql-password: some_password
+
+
+"
+
