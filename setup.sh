@@ -1,5 +1,3 @@
-#!usr/bin/bash
-
 set -e
 
 echo "Refreshing..."
@@ -21,7 +19,7 @@ sudo systemctl start NetworkManager
 
 echo "Libs..."
 
-sudo apt -y install libcairo2-dev libjpeg62-turbo-dev libpng-dev libtool-bin xrdp xrdp-xorg libavcodec-dev libavformat-dev libavutil-dev libswscale-dev uuid-dev freerdp2-dev lib pango1.0-dev libssh2-1-dev libtelnet-dev libwebsockets-dev libssl-dev libvorbis-dev libwebp-dev build-essential gcc
+sudo apt -y install libcairo2-dev libjpeg62-turbo-dev libpng-dev libtool-bin xrdp xorgxrdp libavcodec-dev libavformat-dev libavutil-dev libswscale-dev uuid-dev freerdp2-dev libpango1.0-dev libssh2-1-dev libtelnet-dev libwebsockets-dev libssl-dev libvorbis-dev libwebp-dev build-essential gcc
 
 echo "Tomcat9"
 
